@@ -5,7 +5,9 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.0.0
+# Version: 1.0.1
+
+systems="angelica kotori"
 
 # Check if the script was executed with root privilages.
 if [ "$(id -u)" -ne 0 ]; then
@@ -29,6 +31,8 @@ do
     echo "Commencing pruning of ${uki_src_path}."
     echo "Keeping: ${keep_uki}."
     echo "Removing: ${remove_uki}."
+
+    cd "${uki_src_path}"
 
     while true; do
         read -p "Do you want to continue? (y/n): " answer
