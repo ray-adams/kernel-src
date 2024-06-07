@@ -5,7 +5,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-License-Identifier: BSD-3-Clause
 
-# Version: 3.0.0
+# Version: 1.0.0
 
 working_dir="$(git rev-parse --show-toplevel)"
 src_path="/usr/local/src/"
