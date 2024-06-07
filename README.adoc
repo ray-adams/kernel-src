@@ -2,5 +2,5 @@
 
 === Contents
 
-* https://src.salaciouswind.com/ray/kernel-src/configs[Kernel configuration files].
-* https://src.salaciouswind.com/ray/kernel-src/scripts[Kernel management scripts].
+* https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs[Kernel configuration files].
+* https://src.salaciouswind.com/ray/kernel-src/src/branch/main/scripts[Kernel management scripts].
