@@ -5,9 +5,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.0.0
-
-systems="angelica kotori"
+# Version: 1.1.0
 
 # Check if the script was executed with root privilages.
 if [ "$(id -u)" -ne 0 ]; then
