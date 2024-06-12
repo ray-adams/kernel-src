@@ -5,7 +5,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.0.2
+# Version: 1.1.2
 
 src_path="/usr/local/src/"
 system="$(hostname)"
@@ -62,3 +62,6 @@ local_version="$(echo ${version} | sed 's/linux-//')-$(grep "^CONFIG_LOCALVERSIO
 
 # Make sure we are in the correct directory before copying the uki.
 cd ${linux_src_path} && copy_uki_to_boot
+
+# Create new symlink.
+ln -s "${linux_src_path}" "/usr/src/linux"
