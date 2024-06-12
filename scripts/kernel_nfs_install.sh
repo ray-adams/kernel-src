@@ -5,7 +5,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.0.1
+# Version: 1.0.2
 
 src_path="/usr/local/src/"
 system="$(hostname)"
@@ -19,7 +19,7 @@ fi
 # Check if the source path exists for the current system.
 if [ -e "${src_path}/${system}" ]; then
     echo "Installing kernel and modules for ${system}..."
-    mount "${src_path}/${system}" || die "Failed to mount nfs directory."
+    mount "${src_path}/${system}" || { echo "Failed to mount nfs directory."; exit 1; }
 else
     echo "Kernel sources not found for ${system}"
     exit 1
