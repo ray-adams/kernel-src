@@ -5,7 +5,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.0.2
+# Version: 1.1.2
 
 src_path="/usr/local/src/"
 
@@ -61,7 +61,7 @@ compile_uki() {
     initramfs_path="${src_path}/${system}/initramfs/initramfs-${system}.cpio"
 
     make -j6 || { echo "Error compiling kernel ${local_version}."; exit 1; }
-    make modules_install || { echo "Error installing modules to /lib/modules/${local_version}/."; exit 1; }
+    make modules_install || { echo "Error compiling modules to /lib/modules/${local_version}/."; exit 1; }
 
     dracut -f --kver=${local_version} ${initramfs_path} || { echo "Error creating dracut initramfs image for ${local_version}."; exit 1; }
 
@@ -72,11 +72,15 @@ compile_uki() {
     echo "Finished creating ${local_version} UKI."
 }
 
+uninstall_modules() {
+    rm -r "/lib/modules/${local_version}/" || { echo "Error removing modules from /lib/modules/${local_version}/"; exit 1; }
+}
+
 # Allow the user to select which system to compile a kernel for.
 case ${1} in
     angelica)
         system="angelica"
-        select_version && compile_uki
+        select_version && compile_uki && uninstall_modules
     ;;
 
     kotori)
