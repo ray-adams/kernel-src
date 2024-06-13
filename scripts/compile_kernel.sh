@@ -5,7 +5,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.0.1
+# Version: 1.0.2
 
 src_path="/usr/local/src/"
 
@@ -47,11 +47,6 @@ compile_kernel() {
     echo "Finished creating ${local_version} kernel image."
 }
 
-# Install modules.
-install_modules() {
-    make modules_install || { echo "Error installing modules to /lib/modules/${local_version}/."; exit 1; }
-}
-
 # Copy the unified kernel image to the boot partition.
 copy_to_boot() {
     mount /boot
@@ -66,6 +61,7 @@ compile_uki() {
     initramfs_path="${src_path}/${system}/initramfs/initramfs-${system}.cpio"
 
     make -j6 || { echo "Error compiling kernel ${local_version}."; exit 1; }
+    make modules_install || { echo "Error installing modules to /lib/modules/${local_version}/."; exit 1; }
 
     dracut -f --kver=${local_version} ${initramfs_path} || { echo "Error creating dracut initramfs image for ${local_version}."; exit 1; }
 
@@ -85,7 +81,7 @@ case ${1} in
 
     kotori)
         system="kotori"
-        select_version && compile_uki && install_modules && copy_to_boot
+        select_version && compile_uki && copy_to_boot
     ;;
 
     *)
