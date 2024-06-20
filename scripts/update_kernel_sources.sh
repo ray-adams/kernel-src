@@ -5,7 +5,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.0.0
+# Version: 1.0.1
 
 new_kernel_ver="$(ls "/usr/src/" --hide="linux" | grep "linux")"
 systems="angelica kotori"
@@ -82,5 +82,5 @@ done
 
 # Update symlink for kotori.
 rm /usr/src/linux || { echo "Removing old symlink to ${prev_kernel_ver}"; exit 1; }
-ln -s "${src_path}/kotori/${new_kernel_ver}/" "/usr/src/linux" || { echo "Error creating symlink to new kotori linux source directory."; exit 1; }
-echo "Sucessfully created /usr/src/linux symlink to ${src_path}/kotori/${new_kernel_ver} \n"
+ln -s "${src_path}/${new_kernel_ver}/" "/usr/src/linux" || { echo "Error creating symlink to new kotori linux source directory."; exit 1; }
+echo "Sucessfully created /usr/src/linux symlink to ${src_path}/${new_kernel_ver} \n"
