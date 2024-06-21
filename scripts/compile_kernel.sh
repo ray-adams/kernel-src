@@ -5,7 +5,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.1.2
+# Version: 2.0.0
 
 src_path="/usr/local/src/"
 
@@ -60,12 +60,12 @@ copy_to_boot() {
 compile_uki() {
     initramfs_path="${src_path}/${system}/initramfs/initramfs-${system}.cpio"
 
-    make -j6 || { echo "Error compiling kernel ${local_version}."; exit 1; }
+    LD_PRELOAD="" make -j6 || { echo "Error compiling kernel ${local_version}."; exit 1; }
     make modules_install || { echo "Error compiling modules to /lib/modules/${local_version}/."; exit 1; }
 
     dracut -f --kver=${local_version} ${initramfs_path} || { echo "Error creating dracut initramfs image for ${local_version}."; exit 1; }
 
-    make -j6 || { echo "Error compiling kernel ${local_version} with the new initramfs image."; exit 1; }
+    LD_PRELOAD="" make -j6 || { echo "Error compiling kernel ${local_version} with the new initramfs image."; exit 1; }
     sbsign --key "/etc/keys/efikeys/db.key" --cert "/etc/keys/efikeys/db.crt" --output "${src_path}/${system}/uki/vmlinuz-${local_version}.efi" "${linux_src_path}/arch/x86/boot/bzImage" \
         || { echo "Error signing unified kernel image vmlinuz-${local_version}.efi."; exit 1; }
 
