@@ -1,6 +1,17 @@
 == Description
 
+=== Notice
+
+Links to directories within this repository point to src.salaciouswind.com.
+Therefore, it won't work as intended on mirrors.
+
 === Contents
 
-* https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs[Kernel configuration files].
+==== Kernel configuration files
+
+* https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica[angelica].
+* https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/eleanore[eleanore].
+* https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori[kotori].
+
+==== Scripts
 * https://src.salaciouswind.com/ray/kernel-src/src/branch/main/scripts[Kernel management scripts].
