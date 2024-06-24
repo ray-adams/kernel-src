@@ -1,11 +1,13 @@
 #!/bin/sh
 
-# prune_uki_paths.sh - Prune deprecated unified kernel images (UKIs) from /usr/src/uki (REQUIRES ROOT PRIVILAGES).
+# Script Name: prune_uki_paths.sh
+# File Path: <git_root>/scripts/
+# Description: Prune deprecated unified kernel images (UKIs) from /usr/local/src/ (REQUIRES ROOT PRIVILAGES).
 
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.0.1
+# Version: 1.1.1
 
 systems="angelica kotori"
 

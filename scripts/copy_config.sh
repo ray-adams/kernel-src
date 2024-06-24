@@ -1,11 +1,13 @@
 #!/bin/sh
 
-# copy_config.sh - copy kernel configuration
+# Script Name: copy_config.sh
+# File Path: <git_root>/scripts/
+# Description: Copy kernel configuration based on user selected version.
 
 # Copyright 2024 Ray Adams
-# SPDX-License-Identifier: BSD-3-Clause
+# SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.0.1
+# Version: 1.1.1
 
 working_dir="$(git rev-parse --show-toplevel)"
 src_path="/usr/local/src/"

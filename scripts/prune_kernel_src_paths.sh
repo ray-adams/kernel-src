@@ -1,11 +1,13 @@
 #!/bin/sh
 
-# prune_kernel_src_paths.sh - Prune deprecated kernel source directories from /usr/local/src/ (REQUIRES ROOT PRIVILAGES).
+# Script Name: prune_kernel_src_paths.sh
+# File Path: <git_root>/scripts/
+# Description: Prune deprecated kernel source directories from /usr/local/src/ (REQUIRES ROOT PRIVILAGES).
 
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.0.0
+# Version: 1.1.0
 
 systems="angelica kotori"
 

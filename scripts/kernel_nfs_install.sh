@@ -1,11 +1,13 @@
 #!/bin/sh
 
-# kernel_nfs_install.sh - Install kernel and modules on target system through nfs (REQUIRES ROOT PRIVILAGES).
+# Script Name: kernel_nfs_install.sh
+# File Path: <git_root>/scripts/
+# Description: Install kernel and modules on target system through nfs (REQUIRES ROOT PRIVILAGES).
 
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.1.3
+# Version: 1.2.3
 
 src_path="/usr/local/src/"
 system="$(hostname)"

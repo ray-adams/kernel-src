@@ -1,11 +1,13 @@
 #!/bin/sh
 
-# prune_module_path.sh - Prune deprecated kernel module directories from /lib/modules/ (REQUIRES ROOT PRIVILAGES).
+# Script Name: prune_module_paths.sh
+# File Path: <git_root>/scripts/
+# Description: Prune deprecated kernel module directories from /lib/modules/ (REQUIRES ROOT PRIVILAGES).
 
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.1.0
+# Version: 1.2.0
 
 # Check if the script was executed with root privilages.
 if [ "$(id -u)" -ne 0 ]; then

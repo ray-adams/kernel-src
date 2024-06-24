@@ -1,19 +1,21 @@
 #!/bin/sh
 
-# replace_cmdline.sh - replace sensitive command line options from kernel config
+# Script Name: replace_cmdline.sh
+# File Path: <git_root>/scripts/
+# Description: Replace kernel cmdline parameters.
 
 # Copyright 2024 Ray Adams
-# SPDX-License-Identifier: BSD-3-Clause
+# SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.0.1
+# Version: 2.0.0
 
 working_dir="$(git rev-parse --show-toplevel)"
 
 cd ${working_dir}
 
-angelica_cmd_line="rd.luks.uuid=<luks_uuid> rd.luks.name=<luks_uuid>=musl-root root=UUID=<root_uuid> nosmt=force intel_iommu=on"
+angelica_cmd_line="rootfstype=bcachefs root=UUID=<root_uuid> nosmt=force intel_iommu=on"
 eleanore_cmd_line="root=PARTUUID=<root_partuuid> nosmt=force"
-kotori_cmd_line="rd.luks.uuid=<luks_uuid> rd.luks.name=<luks_uuid>=musl-root root=UUID=<root_uuid> nosmt=force intel_iommu=on"
+kotori_cmd_line="rootfs_type=bcachefs root=UUID=<root_uuid> nosmt=force intel_iommu=on"
 
 find "./configs/angelica/" -type f -exec sed -i "s/^CONFIG_CMDLINE=.*/CONFIG_CMDLINE=\"${angelica_cmd_line}\"/" {} + \
     || { echo "Error replacing angelica command line parameters."; exit 1; }
