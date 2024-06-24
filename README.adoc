@@ -7,7 +7,7 @@ Therefore, it won't work as intended on mirrors.
 
 === Contents
 
-==== Kernel configuration files for each system
+==== Kernel configuration files
 
 * https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica[angelica].
 * https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/eleanore[eleanore].
