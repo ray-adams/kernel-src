@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.1.0
+# Version: 1.1.1
 
 systems="angelica kotori"
 
@@ -42,7 +42,7 @@ do
 
                 for i in ${remove_kernel_path}
                 do
-                    rm -r "${i}" || { echo "Error removing folder ${i}."; exit 1; }
+                    rm -r "${kernel_src_path}/${i}" || { echo "Error removing folder ${i}."; exit 1; }
                 done
 
                 break
