@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.2.0
+# Version: 1.2.1
 
 # Check if the script was executed with root privilages.
 if [ "$(id -u)" -ne 0 ]; then
@@ -19,7 +19,7 @@ module_path="$(ls "/lib/modules/" | sort -V)"
 
 if [ $(echo ${module_path} | wc -w) -le 2 ]; then
     echo "/lib/modules/ has already been pruned. Skipping...\n"
-    continue
+    exit 0
 fi
 
 keep_module_path="$(echo "${module_path}" | tail -n 2 | xargs)"
