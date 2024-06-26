@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 2.1.1
+# Version: 2.2.1
 
 src_path="/usr/local/src/"
 
@@ -91,6 +91,8 @@ case ${1} in
     ;;
 
     *)
-        echo "Unkown option."
+        echo "Unkown option: \"${1}\""
+        echo "Correct Usuage: ${0} [SYSTEM]"
+        echo "Available systems: angelica, kotori"
     ;;
 esac

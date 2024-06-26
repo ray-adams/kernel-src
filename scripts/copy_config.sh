@@ -7,12 +7,10 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.1.2
+# Ver2ion: 1.3.2
 
 working_dir="$(git rev-parse --show-toplevel)"
 src_path="/usr/local/src/"
-
-cd ${working_dir}
 
 select_version() {
     echo "Available Linux kernels:"
@@ -37,8 +35,8 @@ select_version() {
 }
 
 copy_config() {
-    cp "${linux_src_path}/.config" "./configs/${system}/${local_version}" || { echo "Error copying config to configs/${system}/${local_version}."; exit 1; }
-    ./scripts/replace_cmdline.sh || { echo "Error replacing command line parameters."; exit 1; }
+    cp "${linux_src_path}/.config" "${working_dir}/configs/${system}/${local_version}" || { echo "Error copying config to configs/${system}/${local_version}."; exit 1; }
+    ${working_dir}/scripts/replace_cmdline.sh || { echo "Error replacing command line parameters."; exit 1; }
 
     echo "Copied ${local_version} successfully."
 }
@@ -55,6 +53,8 @@ case ${1} in
     ;;
 
     *)
-        echo "Unkown option."
+        echo "Unkown option: \"${1}\""
+        echo "Correct Usuage: ${0} [SYSTEM]"
+        echo "Available systems: angelica, kotori"
     ;;
 esac
