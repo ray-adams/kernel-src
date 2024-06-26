@@ -1,13 +1,13 @@
 #!/bin/sh
 
 # Script Name: replace_cmdline.sh
-# File Path: <git_root>/scripts/
+# File Path: <git_root>/scripts/replace_cmdline.sh
 # Description: Replace kernel cmdline parameters.
 
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 2.0.0
+# Version: 2.0.1
 
 working_dir="$(git rev-parse --show-toplevel)"
 

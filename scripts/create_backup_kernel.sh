@@ -1,13 +1,13 @@
 #!/bin/sh
 
 # Script Name: create_backup_kernel.sh
-# File Path: <git_root>/scripts/
+# File Path: <git_root>/scripts/create_backup_kernel.sh
 # Description: Copy current kernel to the backup location specfied via efibootmgr (REQUIRES ROOT PRIVILAGES).
 
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.1.0
+# Version: 1.1.1
 
 # Check if the script was executed with root privilages.
 if [ "$(id -u)" -ne 0 ]; then

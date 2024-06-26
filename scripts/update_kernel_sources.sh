@@ -1,13 +1,13 @@
 #!/bin/sh
 
 # Script Name: update_kernel_sources.sh
-# File Path: <git_root>/scripts/
+# File Path: <git_root>/scripts/update_kernel_sources.sh
 # Description: Update kernel source directories in /usr/local/src/ (REQUIRES ROOT PRIVILAGES).
 
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.1.1
+# Version: 1.1.2
 
 new_kernel_ver="$(ls "/usr/src/" --hide="linux" | grep "linux")"
 systems="angelica kotori"

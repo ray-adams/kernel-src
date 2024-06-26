@@ -1,13 +1,13 @@
 #!/bin/sh
 
 # Script Name: compile_kernel.sh
-# File Path: <git_root>/scripts/
+# File Path: <git_root>/scripts/compile_kernel.sh
 # Description: Compile kernel images based on user selected version (REQUIRES ROOT PRIVILAGES).
 
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 2.1.0
+# Version: 2.1.1
 
 src_path="/usr/local/src/"
 
