@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 2.2.1
+# Version: 2.3.1
 
 src_path="/usr/local/src/"
 
@@ -19,6 +19,11 @@ fi
 
 # Choose available kernel version for system.
 select_version() {
+    if [ ! -e "${src_path}/${system}/" ]; then
+        echo "The directory ${src_path}/${system} does not exist."
+        exit 1
+    fi
+
     echo "Available linux kernels:"
     ls "${src_path}/${system}/linux/"
     while true; do
