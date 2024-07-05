@@ -7,27 +7,34 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 2.3.1
+# Version: 2.4.1
 
+# Default source path
 src_path="/usr/local/src/"
+
+# Colors
+green='\033[0;32m'
+red='\033[0;31m'
+nc='\033[0m'
 
 # Check if the script was executed with root privilages.
 if [ "$(id -u)" -ne 0 ]; then
-    echo "Please run this shell script as root."
+    echo "${red}Please run this shell script as root.${nc}"
     exit 1
 fi
 
 # Choose available kernel version for system.
 select_version() {
     if [ ! -e "${src_path}/${system}/" ]; then
-        echo "The directory ${src_path}/${system} does not exist."
+        echo "${red}The directory ${src_path}/${system} does not exist.${nc}"
         exit 1
     fi
 
-    echo "Available linux kernels:"
-    ls "${src_path}/${system}/linux/"
+    echo "${green}Available linux kernels:${nc}"
+    available_versions="$(ls "${src_path}/${system}/linux/")"
+    echo "${green}${available_versions}${nc}"
     while true; do
-        echo "Select a version:"
+        echo "${green}Select a version:${nc}"
         read version
         if [ -d "${src_path}/${system}/linux/${version}" ]; then
             linux_src_path="${src_path}/${system}/linux/${version}/"
@@ -36,7 +43,7 @@ select_version() {
             linux_src_path="${src_path}/${system}/linux/linux-${version}/"
             break
         else
-            echo "Please choose a valid version."
+            echo "${red}Please choose a valid version.${nc}"
         fi
     done
 
@@ -47,40 +54,40 @@ select_version() {
 
 # Compile the kernel without an initramfs.
 compile_kernel() {
-    make -j6 || { echo "Error compiling kernel ${local_version}."; exit 1; }
+    make -j6 || { echo "${red}Error compiling kernel ${local_version}.${nc}"; exit 1; }
 
-    cp "${linux_src_path}/arch/x86/boot/bzImage" "${src_path}/${system}/vmlinuz/vmlinuz-${local_version}.efi" || { echo "Error copying vmlinuz-${local_version}.efi to source directory."; exit 1; }
+    cp "${linux_src_path}/arch/x86/boot/bzImage" "${src_path}/${system}/vmlinuz/vmlinuz-${local_version}.efi" || { echo "${red}Error copying vmlinuz-${local_version}.efi to source directory.${nc}"; exit 1; }
 
-    echo "Finished creating ${local_version} kernel image."
+    echo "${green}Finished creating ${local_version} kernel image.${nc}"
 }
 
 # Copy the unified kernel image to the boot partition.
 copy_to_boot() {
     mount /boot
-    cp "${src_path}/${system}/uki/vmlinuz-${local_version}.efi" "/boot/efi/boot/bootx64.efi" || { echo "Error copying vmlinuz-${local_version}.efi to boot partition."; exit 1; }
+    cp "${src_path}/${system}/uki/vmlinuz-${local_version}.efi" "/boot/efi/boot/bootx64.efi" || { echo "${red}Error copying vmlinuz-${local_version}.efi to boot partition.${nc}"; exit 1; }
     umount /boot
 
-    echo "Copied ${local_version} to /boot/efi/boot/bootx64.efi."
+    echo "${red}Copied ${local_version} to /boot/efi/boot/bootx64.efi.${nc}"
 }
 
 # Compile and sign the unified kernel image.
 compile_uki() {
     initramfs_path="${src_path}/${system}/initramfs/initramfs-${system}.cpio"
 
-    LD_PRELOAD="" make -j6 || { echo "Error compiling kernel ${local_version}."; exit 1; }
-    make modules_install || { echo "Error compiling modules to /lib/modules/${local_version}/."; exit 1; }
+    LD_PRELOAD="" make -j6 || { echo "${red}Error compiling kernel ${local_version}.${nc}"; exit 1; }
+    make modules_install || { echo "${red}Error compiling modules to /lib/modules/${local_version}/.${nc}"; exit 1; }
 
-    dracut -f --kver=${local_version} ${initramfs_path} || { echo "Error creating dracut initramfs image for ${local_version}."; exit 1; }
+    dracut -f --kver=${local_version} ${initramfs_path} || { echo "${red}Error creating dracut initramfs image for ${local_version}.${nc}"; exit 1; }
 
-    LD_PRELOAD="" make -j6 || { echo "Error compiling kernel ${local_version} with the new initramfs image."; exit 1; }
+    LD_PRELOAD="" make -j6 || { echo "${red}Error compiling kernel ${local_version} with the new initramfs image.${nc}"; exit 1; }
     sbsign --key "/etc/keys/efikeys/db.key" --cert "/etc/keys/efikeys/db.crt" --output "${src_path}/${system}/uki/vmlinuz-${local_version}.efi" "${linux_src_path}/arch/x86/boot/bzImage" \
-        || { echo "Error signing unified kernel image vmlinuz-${local_version}.efi."; exit 1; }
+        || { echo "${red}Error signing unified kernel image vmlinuz-${local_version}.efi.${nc}"; exit 1; }
 
-    echo "Finished creating ${local_version} UKI."
+    echo "${green}Finished creating ${local_version} UKI.${nc}"
 }
 
 uninstall_modules() {
-    rm -r "/lib/modules/${local_version}/" || { echo "Error removing modules from /lib/modules/${local_version}/"; exit 1; }
+    rm -r "/lib/modules/${local_version}/" || { echo "${red}Error removing modules from /lib/modules/${local_version}/.${nc}"; exit 1; }
 }
 
 # Allow the user to select which system to compile a kernel for.
