@@ -7,16 +7,22 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Ver2ion: 1.3.2
+# Version: 1.4.2
 
+# Obtain the path for <git_root>
 working_dir="$(git rev-parse --show-toplevel)"
 src_path="/usr/local/src/"
 
+# Colors
+green='\033[0;32m'
+red='\033[0;31m'
+nc='\033[0m'
+
 select_version() {
-    echo "Available Linux kernels:"
+    echo "${green}Available Linux kernels:${nc}"
     ls "${src_path}/${system}/linux/"
     while true; do
-        echo "Select a version:"
+        echo "${green}Select a version:${nc}"
         read version
         if [ -d "${src_path}/${system}/linux/${version}" ]; then
             linux_src_path="${src_path}/${system}/linux/${version}/"
@@ -25,7 +31,7 @@ select_version() {
             linux_src_path="${src_path}/${system}/linux/linux-${version}/"
             break
         else
-            echo "Please choose a valid version."
+            echo "${red}Please choose a valid version.${nc}"
         fi
     done
 
@@ -35,16 +41,32 @@ select_version() {
 }
 
 copy_config() {
-    cp "${linux_src_path}/.config" "${working_dir}/configs/${system}/${local_version}" || { echo "Error copying config to configs/${system}/${local_version}."; exit 1; }
-    ${working_dir}/scripts/replace_cmdline.sh || { echo "Error replacing command line parameters."; exit 1; }
+    cp "${linux_src_path}/.config" "${working_dir}/configs/${system}/${local_version}" || { echo "${red}Error copying config to configs/${system}/${local_version}.${nc}"; exit 1; }
+    ${working_dir}/scripts/replace_cmdline.sh || { echo "${red}Error replacing command line parameters.${nc}"; exit 1; }
 
-    echo "Copied ${local_version} successfully."
+    echo "${green}Copied ${local_version} successfully.${nc}"
+}
+
+rsync_latest_config() {
+    rsync "${system}:/usr/src/linux/.config" "${working_dir}/configs/${system}/new_config"
+
+    local_version="$(awk '/# Linux\/x86/ {print $3}' "${working_dir}/configs/${system}/new_config")-$(grep "^CONFIG_LOCALVERSION" "${working_dir}/configs/${system}/new_config" | sed 's/^CONFIG_LOCALVERSION="-//' | tr -d '"')"
+
+    mv "${working_dir}/configs/${system}/new_config" "${working_dir}/configs/${system}/${local_version}"
+    ${working_dir}/scripts/replace_cmdline.sh || { echo "${red}Error replacing command line parameters.${nc}"; exit 1; }
+
+    echo "${green}Copied ${local_version} successfully.${nc}"
 }
 
 case ${1} in
     angelica)
         system="angelica"
         select_version
+    ;;
+
+    eleanore-compile)
+        system="eleanore-compile"
+        rsync_latest_config
     ;;
 
     kotori)
@@ -55,6 +77,6 @@ case ${1} in
     *)
         echo "Unkown option: \"${1}\""
         echo "Correct Usuage: ${0} [SYSTEM]"
-        echo "Available systems: angelica, kotori"
+        echo "Available systems: angelica, eleanore-compile, kotori"
     ;;
 esac
