@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 3.2.2
+# Version: 3.2.3
 
 # Default source path
 src_path="/usr/local/src/"
@@ -72,7 +72,7 @@ compile_kernel() {
 
     # Compile the kernel
     cd "${compile_dir}/${version}/"
-    make -j6 || { echo "${red}Error compiling kernel ${local_version}.${nc}"; exit 1; }
+    LD_PRELOAD="" make -j6 || { echo "${red}Error compiling kernel ${local_version}.${nc}"; exit 1; }
 
     cp "${compile_dir}/${version}/arch/x86/boot/bzImage" "${src_path}/${system}/vmlinuz/vmlinuz-${local_version}.efi" || { echo "${red}Error copying vmlinuz-${local_version}.efi to source directory.${nc}"; exit 1; }
 
