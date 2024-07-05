@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.5.2
+# Version: 1.6.2
 
 # Obtain the path for <git_root>
 working_dir="$(git rev-parse --show-toplevel)"
@@ -49,7 +49,7 @@ copy_config() {
 
 rsync_latest_config() {
     tmp_file=$(mktemp)
-    rsync "${system}:/usr/src/linux/.config" "${tmp_file}"
+    rsync "${system}:/usr/src/linux/.config" "${tmp_file}" || { echo "${red}Failed to sync config for ${system}.${nc}"; exit 1; }
 
     local_version="$(awk '/# Linux\/x86/ {print $3}' "${tmp_file}")-$(grep "^CONFIG_LOCALVERSION" "${working_dir}/configs/${system}/new_config" | sed 's/^CONFIG_LOCALVERSION="-//' | tr -d '"')"
 
