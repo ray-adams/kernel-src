@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.6.2
+# Version: 1.7.2
 
 # Obtain the path for <git_root>
 working_dir="$(git rev-parse --show-toplevel)"
@@ -65,8 +65,8 @@ case ${1} in
         select_version
     ;;
 
-    eleanore-compile)
-        system="eleanore-compile"
+    eleanore)
+        system="eleanore"
         rsync_latest_config
     ;;
 
@@ -78,6 +78,6 @@ case ${1} in
     *)
         echo "Unkown option: \"${1}\""
         echo "Correct Usuage: ${0} [SYSTEM]"
-        echo "Available systems: angelica, eleanore-compile, kotori"
+        echo "Available systems: angelica, eleanore, kotori"
     ;;
 esac
