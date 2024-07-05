@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 3.2.0
+# Version: 3.2.1
 
 # Default source path
 src_path="/usr/local/src/"
@@ -162,8 +162,8 @@ case ${1} in
     ;;
 
     *)
-        echo "Unkown option: \"${1}\""
-        echo "Correct Usuage: ${0} [SYSTEM]"
-        echo "Available systems: angelica, kotori"
+        echo "${red}Unkown option: \"${1}\"${nc}"
+        echo "${green}Correct Usuage: ${0} [SYSTEM]${nc}"
+        echo "${green}Available systems: angelica, eleanore, kotori${nc}"
     ;;
 esac
