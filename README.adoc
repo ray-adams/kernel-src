@@ -10,7 +10,7 @@ Therefore, it won't work as intended on mirrors.
 ==== Kernel configuration files
 
 * https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica[angelica].
-* https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/eleanore[eleanore].
+* https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/eleanore-compile[eleanore-compile].
 * https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori[kotori].
 
 ==== Scripts
