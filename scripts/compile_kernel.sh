@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 3.1.0
+# Version: 3.2.0
 
 # Default source path
 src_path="/usr/local/src/"
@@ -77,19 +77,17 @@ compile_kernel() {
     cp "${compile_dir}/${version}/arch/x86/boot/bzImage" "${src_path}/${system}/vmlinuz/vmlinuz-${local_version}.efi" || { echo "${red}Error copying vmlinuz-${local_version}.efi to source directory.${nc}"; exit 1; }
 
     # Remove kernel directory from tmpfs
+    cd "${src_path}/${system}/"
     rm -r "${compile_dir}/${version}/" || { echo "${red}Error removing ${local_version} from tmpfs.${nc}"; exit 1; }
     umount "${compile_dir}" || { echo "${red}Error unmounting tmpfs.${nc}"; exit 1; }
 
     echo "${green}Finished creating ${local_version} kernel image.${nc}"
 }
 
-# Copy the unified kernel image to the boot partition.
-copy_to_boot() {
-    mount /boot
-    cp "${src_path}/${system}/uki/vmlinuz-${local_version}.efi" "/boot/efi/boot/bootx64.efi" || { echo "${red}Error copying vmlinuz-${local_version}.efi to boot partition.${nc}"; exit 1; }
-    umount /boot
-
-    echo "${red}Copied ${local_version} to /boot/efi/boot/bootx64.efi.${nc}"
+# Compile nvidia drivers
+compile_nvidia() {
+    echo "${green}Compiling nvidia drivers.${nc}"
+    EMERGE_DEFAULT_OPTS="--quiet" x11-drivers/nvidia-drivers || { echo "${red}Error compiling nvidia drivers.${nc}"; exit 1; }
 }
 
 # Compile and sign the unified kernel image.
@@ -124,10 +122,20 @@ compile_uki() {
         || { echo "${red}Error signing unified kernel image vmlinuz-${local_version}.efi.${nc}"; exit 1; }
 
     # Remove kernel directory from tmpfs
+    cd "${src_path}/${system}/"
     rm -r "${compile_dir}/${version}/" || { echo "${red}Error removing ${local_version} from tmpfs.${nc}"; exit 1; }
     umount "${compile_dir}" || { echo "${red}Error unmounting tmpfs.${nc}"; exit 1; }
 
     echo "${green}Finished creating ${local_version} UKI.${nc}"
+}
+
+# Copy the unified kernel image to the boot partition.
+copy_to_boot() {
+    mount /boot
+    cp "${src_path}/${system}/uki/vmlinuz-${local_version}.efi" "/boot/efi/boot/bootx64.efi" || { echo "${red}Error copying vmlinuz-${local_version}.efi to boot partition.${nc}"; exit 1; }
+    umount /boot
+
+    echo "${red}Copied ${local_version} to /boot/efi/boot/bootx64.efi.${nc}"
 }
 
 move_modules() {
@@ -141,6 +149,11 @@ case ${1} in
     angelica)
         system="angelica"
         select_version && compile_uki && move_modules
+    ;;
+
+    eleanore)
+        system="eleanore"
+        select_version && compile_kernel && compile_nvidia
     ;;
 
     kotori)
