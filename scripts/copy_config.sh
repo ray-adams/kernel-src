@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.4.2
+# Version: 1.5.2
 
 # Obtain the path for <git_root>
 working_dir="$(git rev-parse --show-toplevel)"
@@ -35,7 +35,7 @@ select_version() {
         fi
     done
 
-    local_version="$(echo ${version} | sed 's/linux-//')-$(grep "^CONFIG_LOCALVERSION" "${linux_src_path}/.config" | sed 's/^CONFIG_LOCALVERSION="-//' | tr -d '"')"
+    local_version="$(awk '/# Linux\/x86/ {print $3}' "${linux_src_path}/.config")-$(grep "^CONFIG_LOCALVERSION" "${linux_src_path}/.config" | sed 's/^CONFIG_LOCALVERSION="-//' | tr -d '"')"
 
     copy_config
 }
@@ -48,11 +48,12 @@ copy_config() {
 }
 
 rsync_latest_config() {
-    rsync "${system}:/usr/src/linux/.config" "${working_dir}/configs/${system}/new_config"
+    tmp_file=$(mktemp)
+    rsync "${system}:/usr/src/linux/.config" "${tmp_file}"
 
-    local_version="$(awk '/# Linux\/x86/ {print $3}' "${working_dir}/configs/${system}/new_config")-$(grep "^CONFIG_LOCALVERSION" "${working_dir}/configs/${system}/new_config" | sed 's/^CONFIG_LOCALVERSION="-//' | tr -d '"')"
+    local_version="$(awk '/# Linux\/x86/ {print $3}' "${tmp_file}")-$(grep "^CONFIG_LOCALVERSION" "${working_dir}/configs/${system}/new_config" | sed 's/^CONFIG_LOCALVERSION="-//' | tr -d '"')"
 
-    mv "${working_dir}/configs/${system}/new_config" "${working_dir}/configs/${system}/${local_version}"
+    mv "${tmp_file}" "${working_dir}/configs/${system}/${local_version}"
     ${working_dir}/scripts/replace_cmdline.sh || { echo "${red}Error replacing command line parameters.${nc}"; exit 1; }
 
     echo "${green}Copied ${local_version} successfully.${nc}"
