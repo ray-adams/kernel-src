@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 3.0.0
+# Version: 3.1.0
 
 # Default source path
 src_path="/usr/local/src/"
@@ -97,6 +97,9 @@ compile_uki() {
     compile_dir="/var/tmp/linux/${system}/"
     initramfs_path="${src_path}/${system}/initramfs/initramfs-${system}.cpio"
 
+    mkdir -p "${src_path}/${system}/initramfs/"
+    mkdir -p "${src_path}/${system}/uki/"
+
     # Check if tmpfs directory exists
     if [ ! -d "${compile_dir}" ]; then
         echo "${red}tmpfs directory ${compile_dir} not found.${nc}"
@@ -111,12 +114,12 @@ compile_uki() {
 
     # Compile the kernel
     cd "${compile_dir}/${version}/"
+
     LD_PRELOAD="" make -j6 || { echo "${red}Error compiling kernel ${local_version}.${nc}"; exit 1; }
     make modules_install || { echo "${red}Error compiling modules to /lib/modules/${local_version}/.${nc}"; exit 1; }
-
     dracut -f --kver=${local_version} ${initramfs_path} || { echo "${red}Error creating dracut initramfs image for ${local_version}.${nc}"; exit 1; }
-
     LD_PRELOAD="" make -j6 || { echo "${red}Error compiling kernel ${local_version} with the new initramfs image.${nc}"; exit 1; }
+
     sbsign --key "/etc/keys/efikeys/db.key" --cert "/etc/keys/efikeys/db.crt" --output "${src_path}/${system}/uki/vmlinuz-${local_version}.efi" "${compile_dir}/${version}/arch/x86/boot/bzImage" \
         || { echo "${red}Error signing unified kernel image vmlinuz-${local_version}.efi.${nc}"; exit 1; }
 
@@ -127,15 +130,17 @@ compile_uki() {
     echo "${green}Finished creating ${local_version} UKI.${nc}"
 }
 
-uninstall_modules() {
-    rm -r "/lib/modules/${local_version}/" || { echo "${red}Error removing modules from /lib/modules/${local_version}/.${nc}"; exit 1; }
+move_modules() {
+    mkdir -p "${src_path}/${system}/modules/"
+    mv "/lib/modules/${local_version}/" "${src_path}/${system}/modules/" || { echo "${red}Error moving modules from /lib/modules/${local_version}/ to ${src_path}/${system}/modules/.${nc}"; exit 1; }
+    echo "${green}Finished moving modules for ${local_version} to ${src_path}/${system}/modules/.${nc}"
 }
 
 # Allow the user to select which system to compile a kernel for.
 case ${1} in
     angelica)
         system="angelica"
-        select_version && compile_uki && uninstall_modules
+        select_version && compile_uki && move_modules
     ;;
 
     kotori)
