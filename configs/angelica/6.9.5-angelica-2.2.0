@@ -439,7 +439,7 @@ CONFIG_HOTPLUG_CPU=y
 # CONFIG_LEGACY_VSYSCALL_XONLY is not set
 CONFIG_LEGACY_VSYSCALL_NONE=y
 CONFIG_CMDLINE_BOOL=y
-CONFIG_CMDLINE="rd.luks.uuid=<luks_uuid> rd.luks.name=<luks_uuid>=musl-root root=UUID=<root_uuid> nosmt=force intel_iommu=on"
+CONFIG_CMDLINE="rootfstype=bcachefs root=UUID=<root_uuid> nosmt=force intel_iommu=on quiet"
 CONFIG_CMDLINE_OVERRIDE=y
 # CONFIG_MODIFY_LDT_SYSCALL is not set
 # CONFIG_STRICT_SIGALTSTACK_SIZE is not set
