@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 2.0.0
+# Version: 2.1.0
 
 # Default source path
 src_path="/usr/local/src/"
@@ -28,7 +28,7 @@ fi
 
 # Check if the source path exists for the current system
 if [ -e "${src_path}/${system}" ]; then
-    echo "${green}Installing kernel and modules for ${system}...${nc}"
+    echo "${green}Installing kernel and modules for ${system}.${nc}"
     mount "${src_path}/${system}" || { echo "${red}Failed to mount nfs directory.${nc}"; exit 1; }
 else
     echo "Kernel sources not found for ${system}"
@@ -49,6 +49,7 @@ copy_uki_to_boot() {
 # Install the kernel modules to /lib/modules
 install_modules() {
     cp -r "${src_path}/${system}/modules/${local_version}" "/lib/modules/"|| { echo "${red}Error copying modules to /lib/modules/${local_version}/.${nc}"; exit 1; }
+    echo "${green}Copied modules for ${local_version} to /lib/modules/ successfully.${nc}"
 }
 
 # Let user choose a kernel version to install
