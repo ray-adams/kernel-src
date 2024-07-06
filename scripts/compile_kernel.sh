@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 3.2.5
+# Version: 3.2.6
 
 # Default source path
 src_path="/usr/local/src/"
@@ -140,7 +140,7 @@ copy_to_boot() {
     cp "${src_path}/${system}/uki/vmlinuz-${local_version}.efi" "/boot/efi/boot/bootx64.efi" || { echo "${red}Error copying vmlinuz-${local_version}.efi to boot partition.${nc}"; exit 1; }
     umount /boot
 
-    echo "${red}Copied ${local_version} to /boot/efi/boot/bootx64.efi.${nc}"
+    echo "${green}Copied ${local_version} to /boot/efi/boot/bootx64.efi.${nc}"
 }
 
 move_modules() {
