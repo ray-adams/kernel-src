@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 3.2.3
+# Version: 3.2.1
 
 # Default source path
 src_path="/usr/local/src/"
@@ -57,6 +57,8 @@ select_version() {
 # Compile the kernel without an initramfs
 compile_kernel() {
     compile_dir="/var/tmp/linux/${system}/"
+
+    mkdir -p "${src_path}/${system}/vmlinuz/"
 
     # Check if tmpfs directory exists
     if [ ! -d "${compile_dir}" ]; then
