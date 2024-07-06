@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 3.2.1
+# Version: 3.2.2
 
 # Default source path
 src_path="/usr/local/src/"
@@ -75,21 +75,23 @@ compile_kernel() {
     # Compile the kernel
     cd "${compile_dir}/${version}/"
     LD_PRELOAD="" make -j6 || { echo "${red}Error compiling kernel ${local_version}.${nc}"; exit 1; }
+    make modules_install || { echo "${red}Error compiling modules to /lib/modules/${local_version}/.${nc}"; exit 1; }
 
     cp "${compile_dir}/${version}/arch/x86/boot/bzImage" "${src_path}/${system}/vmlinuz/vmlinuz-${local_version}.efi" || { echo "${red}Error copying vmlinuz-${local_version}.efi to source directory.${nc}"; exit 1; }
-
-    # Remove kernel directory from tmpfs
-    cd "${src_path}/${system}/"
-    rm -r "${compile_dir}/${version}/" || { echo "${red}Error removing ${local_version} from tmpfs.${nc}"; exit 1; }
-    umount "${compile_dir}" || { echo "${red}Error unmounting tmpfs.${nc}"; exit 1; }
 
     echo "${green}Finished creating ${local_version} kernel image.${nc}"
 }
 
 # Compile nvidia drivers
 compile_nvidia() {
+    echo "${green}Changing /usr/src/linux symlink to tmpfs.${nc}"
+    ln -sf "${compile_dir}/${version}" "/usr/src/linux" || { echo "${red}Error creating symlink to ${compile_dir}.${nc}"; exit 1; }
+
     echo "${green}Compiling nvidia drivers.${nc}"
     EMERGE_DEFAULT_OPTS="--quiet" x11-drivers/nvidia-drivers || { echo "${red}Error compiling nvidia drivers.${nc}"; exit 1; }
+
+    echo "${green}Changing /usr/src/linux symlink back to ${linux_src_path}.${nc}"
+    ln -sf "${linux_src_path}" "/usr/src/linux" || { echo "${red}Error creating symlink to ${linux_src_path}.${nc}"; exit 1; }
 }
 
 # Compile and sign the unified kernel image.
@@ -123,10 +125,7 @@ compile_uki() {
     sbsign --key "/etc/keys/efikeys/db.key" --cert "/etc/keys/efikeys/db.crt" --output "${src_path}/${system}/uki/vmlinuz-${local_version}.efi" "${compile_dir}/${version}/arch/x86/boot/bzImage" \
         || { echo "${red}Error signing unified kernel image vmlinuz-${local_version}.efi.${nc}"; exit 1; }
 
-    # Remove kernel directory from tmpfs
-    cd "${src_path}/${system}/"
-    rm -r "${compile_dir}/${version}/" || { echo "${red}Error removing ${local_version} from tmpfs.${nc}"; exit 1; }
-    umount "${compile_dir}" || { echo "${red}Error unmounting tmpfs.${nc}"; exit 1; }
+    remove_tmp_dir
 
     echo "${green}Finished creating ${local_version} UKI.${nc}"
 }
@@ -146,6 +145,13 @@ move_modules() {
     echo "${green}Finished moving modules for ${local_version} to ${src_path}/${system}/modules/.${nc}"
 }
 
+remove_tmp_dir() {
+    # Remove kernel directory from tmpfs
+    cd "${src_path}/${system}/"
+    rm -r "${compile_dir}/${version}/" || { echo "${red}Error removing ${local_version} from tmpfs.${nc}"; exit 1; }
+    umount "${compile_dir}" || { echo "${red}Error unmounting tmpfs.${nc}"; exit 1; }
+}
+
 # Allow the user to select which system to compile a kernel for.
 case ${1} in
     angelica)
@@ -155,7 +161,7 @@ case ${1} in
 
     eleanore)
         system="eleanore"
-        select_version && compile_kernel && compile_nvidia
+        select_version && compile_kernel && compile_nvidia && remove_tmp_dir
     ;;
 
     kotori)
