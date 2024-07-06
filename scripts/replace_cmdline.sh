@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 2.2.1
+# Version: 2.3.1
 
 # Obtain the path for <git_root>
 working_dir="$(git rev-parse --show-toplevel)"
@@ -24,7 +24,7 @@ kotori_cmd_line="rootfs_type=bcachefs root=UUID=<root_uuid> nosmt=force intel_io
 
 find "${working_dir}/configs/angelica/" -type f -exec sed -i "s/^CONFIG_CMDLINE=.*/CONFIG_CMDLINE=\"${angelica_cmd_line}\"/" {} + \
     || { echo "${red}Error replacing angelica command line parameters.${nc}"; exit 1; }
-find "${working_dir}/configs/eleanore-compile/" -type f -exec sed -i "s/^CONFIG_CMDLINE=.*/CONFIG_CMDLINE=\"${eleanore_cmd_line}\"/" {} + \
+find "${working_dir}/configs/eleanore/" -type f -exec sed -i "s/^CONFIG_CMDLINE=.*/CONFIG_CMDLINE=\"${eleanore_cmd_line}\"/" {} + \
     || { echo "${red}Error replacing eleanore command line parameters.${nc}"; exit 1; }
 find "${working_dir}/configs/kotori/" -type f -exec sed -i "s/^CONFIG_CMDLINE=.*/CONFIG_CMDLINE=\"${kotori_cmd_line}\"/" {} + \
     || { echo "${red}Error replacing kotori command line parameters.${nc}"; exit 1; }

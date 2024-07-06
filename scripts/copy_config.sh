@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.7.2
+# Version: 1.7.3
 
 # Obtain the path for <git_root>
 working_dir="$(git rev-parse --show-toplevel)"
@@ -51,7 +51,7 @@ rsync_latest_config() {
     tmp_file=$(mktemp)
     rsync "${system}:/usr/src/linux/.config" "${tmp_file}" || { echo "${red}Failed to sync config for ${system}.${nc}"; exit 1; }
 
-    local_version="$(awk '/# Linux\/x86/ {print $3}' "${tmp_file}")-$(grep "^CONFIG_LOCALVERSION" "${working_dir}/configs/${system}/new_config" | sed 's/^CONFIG_LOCALVERSION="-//' | tr -d '"')"
+    local_version="$(awk '/# Linux\/x86/ {print $3}' "${tmp_file}")-$(grep "^CONFIG_LOCALVERSION" "${tmp_file}" | sed 's/^CONFIG_LOCALVERSION="-//' | tr -d '"')"
 
     mv "${tmp_file}" "${working_dir}/configs/${system}/${local_version}"
     ${working_dir}/scripts/replace_cmdline.sh || { echo "${red}Error replacing command line parameters.${nc}"; exit 1; }
