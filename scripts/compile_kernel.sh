@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 3.2.2
+# Version: 3.2.3
 
 # Default source path
 src_path="/usr/local/src/"
@@ -85,13 +85,15 @@ compile_kernel() {
 # Compile nvidia drivers
 compile_nvidia() {
     echo "${green}Changing /usr/src/linux symlink to tmpfs.${nc}"
-    ln -sf "${compile_dir}/${version}" "/usr/src/linux" || { echo "${red}Error creating symlink to ${compile_dir}.${nc}"; exit 1; }
+    rm "/usr/src/linux" || { echo "${red}Error removing symlink /usr/src/linux.${nc}"; exit 1; }
+    ln -sf "${compile_dir}/${version}/" "/usr/src/linux" || { echo "${red}Error creating symlink to ${compile_dir}.${nc}"; exit 1; }
 
     echo "${green}Compiling nvidia drivers.${nc}"
     EMERGE_DEFAULT_OPTS="--quiet" x11-drivers/nvidia-drivers || { echo "${red}Error compiling nvidia drivers.${nc}"; exit 1; }
 
     echo "${green}Changing /usr/src/linux symlink back to ${linux_src_path}.${nc}"
-    ln -sf "${linux_src_path}" "/usr/src/linux" || { echo "${red}Error creating symlink to ${linux_src_path}.${nc}"; exit 1; }
+    rm "/usr/src/linux" || { echo "${red}Error removing symlink /usr/src/linux.${nc}"; exit 1; }
+    ln -sf "${linux_src_path}/" "/usr/src/linux" || { echo "${red}Error creating symlink to ${linux_src_path}.${nc}"; exit 1; }
 }
 
 # Compile and sign the unified kernel image.
