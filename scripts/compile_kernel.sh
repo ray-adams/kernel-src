@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 3.2.3
+# Version: 3.2.4
 
 # Default source path
 src_path="/usr/local/src/"
@@ -89,7 +89,7 @@ compile_nvidia() {
     ln -sf "${compile_dir}/${version}/" "/usr/src/linux" || { echo "${red}Error creating symlink to ${compile_dir}.${nc}"; exit 1; }
 
     echo "${green}Compiling nvidia drivers.${nc}"
-    EMERGE_DEFAULT_OPTS="--quiet" x11-drivers/nvidia-drivers || { echo "${red}Error compiling nvidia drivers.${nc}"; exit 1; }
+    EMERGE_DEFAULT_OPTS="--quiet" emerge x11-drivers/nvidia-drivers || { echo "${red}Error compiling nvidia drivers.${nc}"; exit 1; }
 
     echo "${green}Changing /usr/src/linux symlink back to ${linux_src_path}.${nc}"
     rm "/usr/src/linux" || { echo "${red}Error removing symlink /usr/src/linux.${nc}"; exit 1; }
