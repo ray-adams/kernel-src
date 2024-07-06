@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 3.2.4
+# Version: 3.2.5
 
 # Default source path
 src_path="/usr/local/src/"
@@ -94,6 +94,8 @@ compile_nvidia() {
     echo "${green}Changing /usr/src/linux symlink back to ${linux_src_path}.${nc}"
     rm "/usr/src/linux" || { echo "${red}Error removing symlink /usr/src/linux.${nc}"; exit 1; }
     ln -sf "${linux_src_path}/" "/usr/src/linux" || { echo "${red}Error creating symlink to ${linux_src_path}.${nc}"; exit 1; }
+
+    remove_tmp_dir
 }
 
 # Compile and sign the unified kernel image.
@@ -163,7 +165,7 @@ case ${1} in
 
     eleanore)
         system="eleanore"
-        select_version && compile_kernel && compile_nvidia && remove_tmp_dir
+        select_version && compile_kernel && compile_nvidia && copy_to_boot
     ;;
 
     kotori)
