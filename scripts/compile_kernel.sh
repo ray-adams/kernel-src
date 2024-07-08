@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 3.2.6
+# Version: 3.2.7
 
 # Default source path
 src_path="/usr/local/src/"
@@ -137,7 +137,14 @@ compile_uki() {
 # Copy the unified kernel image to the boot partition.
 copy_to_boot() {
     mount /boot
-    cp "${src_path}/${system}/uki/vmlinuz-${local_version}.efi" "/boot/efi/boot/bootx64.efi" || { echo "${red}Error copying vmlinuz-${local_version}.efi to boot partition.${nc}"; exit 1; }
+
+    # Check if a UKI is available if not we will copy the non-UKI.
+    if [ -d "${src_path}/${system}/uki/" ]; then
+        cp "${src_path}/${system}/uki/vmlinuz-${local_version}.efi" "/boot/efi/boot/bootx64.efi" || { echo "${red}Error copying vmlinuz-${local_version}.efi to boot partition.${nc}"; exit 1; }
+    else
+        cp "${src_path}/${system}/vmlinuz/vmlinuz-${local_version}.efi" "/boot/efi/boot/bootx64.efi" || { echo "${red}Error copying vmlinuz-${local_version}.efi to boot partition.${nc}"; exit 1; }
+    fi
+
     umount /boot
 
     echo "${green}Copied ${local_version} to /boot/efi/boot/bootx64.efi.${nc}"
