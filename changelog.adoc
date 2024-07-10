@@ -1,8 +1,8 @@
 = Changelog
 
-=== Angelica
+=== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica[Angelica].
 
-==== 6.9.8-angelica-2.4.0
+==== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica/6.9.8-angelica-2.4.0[6.9.8-angelica-2.4.0].
 * Disable NFS.
 * Enable FUSE (Required for SSHFS).
 * Disable btrfs support.
@@ -13,6 +13,6 @@
    SSHFS.
 2. We are disabling btrfs support as we have a full bcachefs system.
 
-=== Eleanore
+=== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/eleanore[Eleanore].
 
-=== Kotori
+=== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori[Kotori].
