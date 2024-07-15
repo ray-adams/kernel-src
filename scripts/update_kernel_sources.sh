@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 3.1.1
+# Version: 3.1.2
 
 # New kernel version installed by portage
 new_kernel_ver="$(ls "/usr/src/" --hide="linux" | grep "linux")"
@@ -27,7 +27,7 @@ copy_kernel_source() {
     src_path="/usr/local/src/${system}/"
 
     # Check if the system source files exist
-    if [ ! -d "${src_path}" ]; then
+    if [ ! -e "${src_path}" ]; then
         echo "${red}${system}'s source files are not present in /usr/local/src/.${nc}"
         exit 1
     fi
