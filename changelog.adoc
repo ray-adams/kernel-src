@@ -18,3 +18,13 @@
 === https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/eleanore[Eleanore].
 
 === https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori[Kotori].
+
+==== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori/6.9.9-kotori-2.8.0[6.9.9-angelica-2.8.0].
+
+===== Summary
+* Disable NFS.
+
+===== Release notes
+1. We are disabling NFS due to the fact that it causes constant kernel panics
+   when dealing with virtual machines. It also is unencrypted and is inferior to
+   SSHFS.
