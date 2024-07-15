@@ -2,6 +2,11 @@
 
 === https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica[Angelica].
 
+==== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica/6.9.9-angelica-2.5.0[6.9.9-angelica-2.5.0].
+
+===== Summary
+* Version bump to 6.9.9.
+
 ==== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica/6.9.8-angelica-2.4.0[6.9.8-angelica-2.4.0].
 
 ===== Summary
