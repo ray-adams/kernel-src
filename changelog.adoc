@@ -2,7 +2,7 @@
 
 == https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica[Angelica]
 
-=== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica/6.10.0-angelica-3.0.0[6.10.0-angelica-3.0.0].
+=== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica/6.10.0-angelica-3.0.0[6.10.0-angelica-3.0.0]
 
 ==== CONFIG changes
 * *CONFIG_BASE_SMALL=N*
@@ -33,12 +33,12 @@
 ==== Release notes
 * Version bump to 6.10.0.
 
-=== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica/6.9.9-angelica-2.5.0[6.9.9-angelica-2.5.0].
+=== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica/6.9.9-angelica-2.5.0[6.9.9-angelica-2.5.0]
 
 ==== Release notes
 * Version bump to 6.9.9.
 
-=== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica/6.9.8-angelica-2.4.0[6.9.8-angelica-2.4.0].
+=== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica/6.9.8-angelica-2.4.0[6.9.8-angelica-2.4.0]
 
 ==== CONFIG changes
 * *CONFIG_NETWORK_FILESYSTEM=n*
@@ -53,7 +53,7 @@
 
 == https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/eleanore[Eleanore]
 
-=== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/eleanore/6.10.0-eleanore-3.0.0[6.10.0-eleanore-3.0.0].
+=== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/eleanore/6.10.0-eleanore-3.0.0[6.10.0-eleanore-3.0.0]
 
 ==== CONFIG changes
 * *CONFIG_NETWORK_FILESYSTEM=n*
@@ -86,7 +86,7 @@
 
 == https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori[Kotori]
 
-=== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori/6.10.0-kotori-3.0.0[6.10.0-kotori-3.0.0].
+=== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori/6.10.0-kotori-3.0.0[6.10.0-kotori-3.0.0]
 
 ==== CONFIG changes
 * *CONFIG_BASE_SMALL=N*
