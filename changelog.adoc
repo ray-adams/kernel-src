@@ -110,7 +110,7 @@
 ==== Release notes
 1. Version bump to 6.10.0.
 
-=== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori/6.9.9-kotori-2.8.0[6.9.9-kotori-2.8.0].
+=== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori/6.9.9-kotori-2.8.0[6.9.9-kotori-2.8.0]
 
 ==== CONFIG changes
 * *CONFIG_NETWORK_FILESYSTEM=n*
