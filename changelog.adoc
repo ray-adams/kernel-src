@@ -4,15 +4,15 @@
 
 ==== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica/6.9.9-angelica-2.5.0[6.9.9-angelica-2.5.0].
 
-===== Summary
+===== Release notes
 * Version bump to 6.9.9.
 
 ==== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica/6.9.8-angelica-2.4.0[6.9.8-angelica-2.4.0].
 
-===== Summary
-* Disable NFS.
-* Enable FUSE (Required for SSHFS).
-* Disable btrfs support.
+===== CONFIG changes
+* *CONFIG_NETWORK_FILESYSTEM=n*
+* *CONFIG_FUSE_FS=y*
+* *CONFIG_BTRFS_FS=n*
 
 ===== Release notes
 1. We are disabling NFS due to the fact that it causes constant kernel panics
@@ -24,7 +24,9 @@
 
 ==== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/eleanore/6.10.0-eleanore-3.0.0[6.10.0-angelica-3.0.0].
 
-===== Summary
+===== CONFIG changes
+* *CONFIG_NETWORK_FILESYSTEM=n*
+* *CONFIG_FUSE_FS=y*
 * *CONFIG_BASE_SMALL=N*
 * *CONFIG_X86_POSTED_MSI=N*
 * *CONFIG_PFCP=N*
@@ -41,12 +43,20 @@
 * *CONFIG_LENOVO_WMI_CAMERA=N*
 * *CONFIG_MEM_ALLOC_PROFILING=N*
 
+===== Release notes
+1. Version bump to 6.10.0.
+2. Disabled CFI since it conflicts with nvidia proprietary drivers.
+3. Enabled FULL LTO for the kernel as we have enough ram in the VM.
+4. We are disabling NFS due to the fact that it causes constant kernel panics
+   when dealing with virtual machines. It also is unencrypted and is inferior to
+   SSHFS.
+
 === https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori[Kotori].
 
 ==== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori/6.9.9-kotori-2.8.0[6.9.9-angelica-2.8.0].
 
-===== Summary
-* Disable NFS.
+===== CONFIG changes
+* *CONFIG_NETWORK_FILESYSTEM=n*
 
 ===== Release notes
 1. We are disabling NFS due to the fact that it causes constant kernel panics
