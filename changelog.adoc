@@ -2,6 +2,37 @@
 
 === https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica[Angelica].
 
+==== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica/6.10.0-angelica-3.0.0[6.10.0-angelica-3.0.0].
+
+===== CONFIG changes
+* *CONFIG_BASE_SMALL=N*
+* *CONFIG_KVM_INTEL_PROVE_VE=N*
+* *CONFIG_PFCP=N*
+* *CONFIG_AIR_EN8811H_PHY=N*
+* *CONFIG_TCG_TMP2_HMAC=Y*
+* *CONFIG_I2C_ZHAOXIN=N*
+* *CONFIG_GPIO_GRANITERAPIDS=N*
+* *CONFIG_SENSORS_LENOVO_EC=N*
+* *CONFIG_LENOVO_SE10_WDT=N*
+* *CONFIG_DRM_DISPLAY_DP_AUX_CEC=N*
+* *CONFIG_DRM_DISPLAY_DP_AUX_CHARDEV=N*
+* *CONFIG_SND_SOC_PCM6240=N*
+* *CONFIG_HID_WINWING=N*
+* *CONFIG_RTC_DRV_RX8111=N*
+* *CONFIG_ACPI_QUICKSTART=N*
+* *CONFIG_MEEGOPAD_ANX7428=N*
+* *CONFIG_MSI_WMI_PLATFORM=N*
+* *CONFIG_LENOVO_WMI_CAMERA=N*
+* *CONFIG_AD7173=N*
+* *CONFIG_AD7944=N*
+* *CONFIG_AD9739A=N*
+* *CONFIG_ADI_AXI_DAC=N*
+* *CONFIG_APDS9306=N*
+* *CONFIG_MEM_ALLOC_PROFILING=N*
+
+===== Release notes
+* Version bump to 6.10.0.
+
 ==== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica/6.9.9-angelica-2.5.0[6.9.9-angelica-2.5.0].
 
 ===== Release notes
