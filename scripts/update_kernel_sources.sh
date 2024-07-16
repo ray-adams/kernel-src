@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 3.1.2
+# Version: 3.1.3
 
 # New kernel version installed by portage
 new_kernel_ver="$(ls "/usr/src/" --hide="linux" | grep "linux")"
@@ -80,7 +80,7 @@ make_oldconfig() {
                     fi
                 done
                 
-                echo "${green}Successfully updated local version for ${system}/${new_local_ver_ans}.${nc}\n"
+                echo "${green}Successfully updated config version to ${new_kernel_ver}-${system}-${new_local_ver_ans}.${nc}\n"
                 break
             ;;
     
