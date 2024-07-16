@@ -24,7 +24,7 @@
 
 ==== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/eleanore/6.10.0-eleanore-3.0.0[6.10.0-angelica-3.0.0].
 
-====== Summary
+===== Summary
 * CONFIG_BASE_SMALL=N
 * CONFIG_X86_POSTED_MSI=N
 * CONFIG_PFCP=N
