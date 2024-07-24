@@ -86,6 +86,14 @@
 
 == https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori[Kotori]
 
+=== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori/6.10.0-kotori-3.1.0[6.10.0-kotori-3.1.0]
+
+==== CONFIG changes
+* *CONFIG_BTRFS_FS=n*
+
+==== Release notes
+1. Removing support for the btrfs filesystem as we have fully migrated over to bcachefs.
+
 === https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori/6.10.0-kotori-3.0.0[6.10.0-kotori-3.0.0]
 
 ==== CONFIG changes
