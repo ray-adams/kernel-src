@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 2.1.0
+# Version: 2.2.0
 
 # Default source path
 src_path="/usr/local/src/"
@@ -78,4 +78,5 @@ copy_uki_to_boot
 
 # Create new symlink
 echo "${green}Creating new symlink to ${linux_src_path}.${nc}"
-ln -s "${linux_src_path}" "/usr/src/linux"
+rm /usr/src/linux || { echo "${red}Failed to remove old symlink to ${prev_kernel_ver}.${nc}"; exit 1; }
+ln -s "${linux_src_path}" "/usr/src/linux" || {echo "${red}Failed to create symlink to ${src_path}/linux/${new_kernel_ver}.${nc}"; exit 1; }
