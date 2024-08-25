@@ -7,10 +7,10 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 3.1.3
+# Version: 3.2.4
 
 # New kernel version installed by portage
-new_kernel_ver="$(ls "/usr/src/" --hide="linux" | grep "linux")"
+new_kernel_ver="$(ls "/usr/src/" --hide="linux" | grep "linux" | sort -V | tail -n 1)"
 
 # Colors
 green='\033[0;32m'
@@ -32,10 +32,10 @@ copy_kernel_source() {
         exit 1
     fi
 
+    prev_kernel_ver="$(ls "${src_path}/linux/" | sort -V | tail -n 1)"
+
     # Remove old kernel sources in /usr/src/
     EMERGE_DEFAULT_OPTS="" emerge --prune --nodeps sys-kernel/vanilla-sources
-
-    prev_kernel_ver="$(ls "${src_path}/linux/" | sort -V | tail -n 1)"
 
     # Check if kernel source already exists. If so skip.
     if [ -d "${src_path}/linux/${new_kernel_ver}" ]; then
