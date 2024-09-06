@@ -14,9 +14,9 @@ updated.
 
 ==== Kernel configuration files
 
-* https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica[angelica]. [EOL]
-* https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/eleanore[eleanore].
-* https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori[kotori].
+* https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/angelica[angelica] [EOL]
+* https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/eleanore[eleanore]
+* https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori[kotori]
 
 ==== Scripts
-* https://src.salaciouswind.com/ray/kernel-src/src/branch/main/scripts[Kernel management scripts].
+* https://src.salaciouswind.com/ray/kernel-src/src/branch/main/scripts[Kernel management scripts]
