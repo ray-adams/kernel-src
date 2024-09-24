@@ -1,0 +1,82 @@
+= Kotori Changelog
+
+== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori/6.10.0-kotori-3.1.0[6.11.0-kotori-4.0.0]
+
+=== Release notes
+1. Version bump to 6.11.0.
+2. CONFIG_SENSORS_SPD5118 relates to the JEDEC JESD300 compliant temperature
+   sensors that are found on DDR5 modules. This may be required in the future
+   to have accurate temperature readings when migrating from DDR4.
+
+=== CONFIG changes
+* *CONFIG_MEMCG_V1=N*
+* *CONFIG_CFI_AUTO_DEFAULT=Y*
+* *CONFIG_SLAB_BUCKETS=Y*
+* *CONFIG_KEBA_CP500=N*
+* *CONFIG_NET_VENDOR_META=n*
+* *CONFIG_PCS_XPCS=N*
+* *CONFIG_SPI_CH341=N*
+* *CONFIG_POWER_SEQUENCING=N*
+* *CONFIG_BATTERY_MAX1720X=N*
+* *CONFIG_SENSORS_SPD5118=N*
+* *CONFIG_MFD_CS40L50_I2C=N*
+* *CONFIG_MFD_CS40L50_SPI=N*
+* *CONFIG_VIDEO_E5010_JPEG_ENC=N*
+* *CONFIG_VIDEO_GC05A2=N*
+* *CONFIG_VIDEO_GC08A3=N*
+* *CONFIG_VIDEO_IMX283=N*
+* *CONFIG_DRM_AMD_ISP=N*
+* *CONFIG_BACKLIGHT_LM3509=N*
+* *CONFIG_SND_HDA_CODEC_SENARYTECH=N*
+* *CONFIG_LEDS_SPI_BYTE=N*
+* *CONFIG_LEDS_TRIGGER_INPUT_EVENTS=N*
+* *CONFIG_CZNIC_PLATFORMS=N*
+* *CONFIG_LAN966X_OIC=N*
+
+== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori/6.10.0-kotori-3.1.0[6.10.8-kotori-3.5.0]
+
+=== Release notes
+1. Version bump to 6.10.8.
+
+== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori/6.10.0-kotori-3.1.0[6.10.0-kotori-3.1.0]
+
+=== CONFIG changes
+* *CONFIG_BTRFS_FS=n*
+
+=== Release notes
+1. Removing support for the btrfs filesystem as we have fully migrated over to bcachefs.
+
+== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori/6.10.0-kotori-3.0.0[6.10.0-kotori-3.0.0]
+
+=== CONFIG changes
+* *CONFIG_BASE_SMALL=N*
+* *CONFIG_X86_POSTED_MSI=N*
+* *CONFIG_KVM_INTEL_PROVE_VE=N*
+* *CONFIG_PFCP=N*
+* *CONFIG_AIR_EN8811H_PHY=N*
+* *CONFIG_TCG_TMP2_HMAC=Y*
+* *CONFIG_I2C_ZHAOXIN=N*
+* *CONFIG_SENSORS_LENOVO_EC=N*
+* *CONFIG_LENOVO_SE10_WDT=N*
+* *CONFIG_DRM_DISPLAY_DP_AUX_CEC=N*
+* *CONFIG_DRM_DISPLAY_DP_AUX_CHARDEV=N*
+* *CONFIG_HID_WINWING=N*
+* *CONFIG_RTC_DRV_RX8111=N*
+* *CONFIG_ACPI_QUICKSTART=N*
+* *CONFIG_MSI_WMI_PLATFORM=N*
+* *CONFIG_LENOVO_WMI_CAMERA=N*
+* *CONFIG_MEM_ALLOC_PROFILING=N*
+
+=== Release notes
+1. Version bump to 6.10.0.
+
+== https://src.salaciouswind.com/ray/kernel-src/src/branch/main/configs/kotori/6.9.9-kotori-2.8.0[6.9.9-kotori-2.8.0]
+
+=== CONFIG changes
+* *CONFIG_NETWORK_FILESYSTEM=n*
+
+=== Release notes
+1. Version bump to 6.9.9.
+2. We are disabling NFS due to the fact that it causes constant kernel panics
+   when dealing with virtual machines. It also is unencrypted and is inferior to
+   SSHFS.

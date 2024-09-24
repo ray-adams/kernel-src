@@ -5,7 +5,9 @@
 Links to directories within this repository point to src.salaciouswind.com.
 Therefore, it won't work as intended on mirrors.
 
-The changelog for each kernel config release is located in https://src.salaciouswind.com/ray/kernel-src/src/branch/main/changelog.adoc[changelog.adoc].
+The changelog for each kernel config release is located in the
+https://src.salaciouswind.com/ray/kernel-src/src/branch/main/changelog[changelog]
+folder.
 
 Systems tagged with "[EOL]" should not be used as kernel configurations will not be
 updated.
