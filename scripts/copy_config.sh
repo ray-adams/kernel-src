@@ -7,7 +7,7 @@
 # Copyright 2024 Ray Adams
 # SPDX-Licence-Identifier: BSD-3-Clause
 
-# Version: 1.7.3
+# Version: 1.8.3
 
 # Obtain the path for <git_root>
 working_dir="$(git rev-parse --show-toplevel)"
@@ -17,6 +17,12 @@ src_path="/usr/local/src/"
 green='\033[0;32m'
 red='\033[0;31m'
 nc='\033[0m'
+
+# Make sure the user doesn't run this script as root.
+if [ "$(id -u)" -eq 0 ]; then
+    echo "${red}Please do not run this script as root.${nc}"
+    exit 1
+fi
 
 select_version() {
     echo "${green}Available Linux kernels:${nc}"
